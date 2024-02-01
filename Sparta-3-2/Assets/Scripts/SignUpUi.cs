@@ -1,16 +1,14 @@
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class SignUpUi : MonoBehaviour
 {
     public InputField id;
     public InputField _name;
+    public UnityEngine.UI.Text message;
     public InputField passward;
     public InputField passwardConfirm;
 
@@ -47,16 +45,19 @@ public class SignUpUi : MonoBehaviour
         {
             if (PlayerPrefs.HasKey(id.text))
             {
-                UnityEngine.Debug.Log("아이디 존재");
+                message.color = UnityEngine.Color.red;
+                message.text = "아이디가 이미 존재합니다.";
             }
             else
             {
-                UnityEngine.Debug.Log("아이디 생성 가능");
+                message.color = UnityEngine.Color.white;
+                UnityEngine.Debug.Log("유효한 아이디 입니다.");
             }
         }
         else
         {
-            UnityEngine.Debug.Log("잘못된 아이디");
+            message.color = UnityEngine.Color.red;
+            message.text = "잘못된 아이디 입니다.";
         }
     }
 
@@ -98,14 +99,14 @@ public class SignUpUi : MonoBehaviour
     {
         if(passward.contentType == InputField.ContentType.Password)
         {
-             passwardEye.GetComponent<Image>().sprite = openEye;
+             passwardEye.GetComponent<UnityEngine.UI.Image>().sprite = openEye;
              passward.contentType = InputField.ContentType.Standard;
              passward.ForceLabelUpdate();
              
         }
         else
         {
-            passwardEye.GetComponent<Image>().sprite = closeEye;
+            passwardEye.GetComponent<UnityEngine.UI.Image>().sprite = closeEye;
             passward.contentType = InputField.ContentType.Password;
             passward.ForceLabelUpdate();
         }
@@ -114,13 +115,13 @@ public class SignUpUi : MonoBehaviour
     {
         if (passwardConfirm.contentType == InputField.ContentType.Password)
         {
-            passwardConfirmEye.GetComponent<Image>().sprite = openEye;
+            passwardConfirmEye.GetComponent<UnityEngine.UI.Image>().sprite = openEye;
             passwardConfirm.contentType = InputField.ContentType.Standard;
             passwardConfirm.ForceLabelUpdate();
         }
         else
         {
-            passwardConfirmEye.GetComponent<Image>().sprite = closeEye;
+            passwardConfirmEye.GetComponent<UnityEngine.UI.Image>().sprite = closeEye;
             passwardConfirm.contentType = InputField.ContentType.Password;
             passwardConfirm.ForceLabelUpdate();
         }
@@ -155,4 +156,20 @@ public class SignUpUi : MonoBehaviour
             return false;
         }
     }
+
+    public void ResetSignUpUi()
+    {
+        
+        id.text = "";
+        _name.text = "";
+        passward.text = "";
+        passwardConfirm.text = "";
+        id.image.color = UnityEngine.Color.white;
+        _name.image.color = UnityEngine.Color.white;
+        passward.image.color = UnityEngine.Color.white;
+        passwardConfirm.image.color = UnityEngine.Color.white;
+        gameObject.SetActive(false);
+    }
+    
+
 }

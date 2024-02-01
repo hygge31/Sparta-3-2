@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class UserData
 {
-    string userID;
+    public string userID;
     public string userName;
-    string passward;
+    public string passward;
     public int bankAccount = 50000;
     public int myWallet = 100000;
     

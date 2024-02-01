@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,8 @@ public class SignUpUi : MonoBehaviour
     public GameObject passwardEye;
     public GameObject passwardConfirmEye;
 
+    public UnityEngine.UI.Text wrongMessage;
+    public GameObject suceseMessage;
     string idPattern = @"^[a-zA-Z0-9]{3,10}$";
     string namePattern = @"^[¤¡-¤¾°¡-ÆR]{2,5}$";
     string passwardPattern = @"^[a-zA-Z0-9]{5,15}$";
@@ -26,7 +29,7 @@ public class SignUpUi : MonoBehaviour
     public void IDRegexIsMatch()
     { 
         bool IsMatch = Regex.IsMatch(id.text,idPattern);
-   
+        message.text = "";
         if (IsMatch)
         {
             id.image.color = UnityEngine.Color.white;
@@ -51,7 +54,7 @@ public class SignUpUi : MonoBehaviour
             else
             {
                 message.color = UnityEngine.Color.white;
-                UnityEngine.Debug.Log("À¯È¿ÇÑ ¾ÆÀÌµð ÀÔ´Ï´Ù.");
+                message.text = "À¯È¿ÇÑ ¾ÆÀÌµð ÀÔ´Ï´Ù.";
             }
         }
         else
@@ -171,5 +174,32 @@ public class SignUpUi : MonoBehaviour
         gameObject.SetActive(false);
     }
     
+    public void SingUp()
+    {
+        if (AllCheckIsMatch())
+        {
+            DataManager.Instance.DataSave(id.text, _name.text, passward.text);
+            suceseMessage.SetActive(true);
+
+        }
+        else
+        {
+            StartCoroutine(DelayMessageCo());
+        }
+    }
+
+    IEnumerator DelayMessageCo()
+    {
+        wrongMessage.text = "Á¤º¸¸¦ Á¦´ë·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä";
+        yield return new WaitForSeconds(0.5f);
+        wrongMessage.text = "";
+    }
+
+    public void CloseSuccessMessage()
+    {
+        suceseMessage.SetActive(false);
+        ResetSignUpUi();
+
+    }
 
 }

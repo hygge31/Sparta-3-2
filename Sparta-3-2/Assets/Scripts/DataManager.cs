@@ -22,4 +22,26 @@ public class DataManager : MonoBehaviour
     }
     //
  
+    public void DataSave(string id,string name,string passward)
+    {
+        UserData userData = new UserData();
+        userData.SetInit(id,name,passward);
+        string json = JsonUtility.ToJson(userData);
+        Debug.Log(json);
+        PlayerPrefs.SetString(userData.userID, json);
+    }
+
+    public bool CheckPassward(UserData user,string passward)
+    {
+        if(user.passward == passward)
+        {
+            this.user = user;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }

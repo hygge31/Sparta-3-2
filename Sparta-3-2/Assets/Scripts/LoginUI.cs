@@ -7,4 +7,7 @@ public class LoginUI : MonoBehaviour
 {
     public InputField id_Inputfield;
     public InputField password_InputField;
+
+
+
 }

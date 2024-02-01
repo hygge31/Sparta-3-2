@@ -8,6 +8,7 @@ public class DataManager : MonoBehaviour
     public string userId;
     public UserData user;
 
+
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -19,5 +20,5 @@ public class DataManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
+    //
 }

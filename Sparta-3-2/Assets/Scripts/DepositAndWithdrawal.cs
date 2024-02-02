@@ -107,7 +107,7 @@ public class DepositAndWithdrawal : Util
         }
         
     }
-    public void Reset()
+    public virtual void OnReset()
     {
         inputField.text = "";
     }

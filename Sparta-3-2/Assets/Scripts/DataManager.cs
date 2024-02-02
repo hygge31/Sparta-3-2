@@ -31,6 +31,13 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetString(userData.userID, json);
     }
 
+
+    public void DataSave(UserData userData,string userId)
+    {
+        string json = JsonUtility.ToJson(userData);
+        PlayerPrefs.SetString(userId, json);
+    }
+
     public bool CheckPassward(UserData user,string passward)
     {
         if(user.passward == passward)

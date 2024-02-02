@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : Util
@@ -31,6 +32,9 @@ public class UIManager : Util
 
     [Header("Withdrawal")]
     public GameObject withdrawalUI;
+
+    [Header("Remit")]
+    public GameObject remitUI;
 
     [Header("Message")]
     public GameObject insufficientBalanceMessage;
@@ -117,6 +121,21 @@ public class UIManager : Util
         }
     }
 
+    public void ToggleRemitUI()
+    {
+        if (remitUI.activeSelf)
+        {
+            remitUI.SetActive(false);
+            btn.SetActive(true);
+        }
+        else
+        {
+            btn.SetActive(false);
+            remitUI.SetActive(true);
+        }
+    }
+
+
     public void ShowInsufficientBalanceMessage()
     {
         insufficientBalanceMessage.SetActive(true);
@@ -126,6 +145,11 @@ public class UIManager : Util
         insufficientBalanceMessage.SetActive(false);
     }
 
+    public void BackBtn()
+    {
+        DataManager.Instance.DataSave(DataManager.Instance.user, DataManager.Instance.user.userID);
+        SceneManager.LoadScene("Task_1_Login");
+    }
 
 
 }

@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 2783360796015538845}
   m_LocalRotation: {x: -0, y: -0, z: 0.012633311, w: 0.99992025}
   m_LocalPosition: {x: -0.02, y: 0.77, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.78678256, y: 0.78678256, z: 0.78678256}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 776296544254892874}
@@ -349,6 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8974161947320200410}
   - component: {fileID: 7180231956521690271}
+  - component: {fileID: 6744348243041507611}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -370,7 +371,7 @@ Transform:
   m_Children:
   - {fileID: 776296544254892874}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7180231956521690271
 Animator:
@@ -393,3 +394,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6744348243041507611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974823555052480771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a662c723cb94d43888c22208a62bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 40
+  attackDamageIncrease: 0
+  shield: 25
+  shieldIncrease: 0
+  health: 70
+  healthIncrease: 0
+  critcal: 25
+  critcalIncrease: 0
+  money: 10000

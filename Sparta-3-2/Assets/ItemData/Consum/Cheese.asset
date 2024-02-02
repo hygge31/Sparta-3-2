@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da39f09e1c7a37498153714df890df4, type: 3}
   m_Name: Cheese
   m_EditorClassIdentifier: 
-  id: 2
+  id: 1
   itemName: Cheese
   itemType: 2
   icon: {fileID: 21300000, guid: e41335ed24c5d4641b9e03ec7a6adcd0, type: 3}
@@ -23,3 +23,4 @@ MonoBehaviour:
   amount: 1
   health: 0
   price: 0
+  itemInfo: 

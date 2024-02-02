@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
 
     
     public List<Item> items = new List<Item>(100); //todo
-
+    
     public GameObject itemHolder;
     public Transform content;
 
@@ -56,7 +56,6 @@ public class InventoryManager : MonoBehaviour
                     //todo
                     var itemIcon = item.transform.Find("Icon").GetComponent<Image>();
                     itemIcon.sprite = itemSO.icon;
-                    Debug.Log(itemSO.amount);
                     if (itemSO.amount > 1)
                     {
                         Transform curItemTransform = item.transform.Find("Amount");
@@ -84,27 +83,34 @@ public class InventoryManager : MonoBehaviour
 
     void ChangeCurrentInventoryCapacityText()
     {
-        int curInventoryCapacity = content.childCount;
+        int curInventoryCapacity = items.Count;
         currentIneventroyCapacityText.text = curInventoryCapacity.ToString();
     }
 
-    //public void AddItem(Item item,int amount)
-    //{
-    //    if (items.Contains(item))
-    //    {
-    //        if(item.itemType == ItemType.Consum)
-    //        {
-    //            ChangeItemAmountUI(item, amount);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        items.Add(item);
-    //    }
+    public void AddItem(Item item, int amount)
+    {
+        if(item.itemType == ItemType.Consum)
+        {
+            if (items.Contains(item))
+            {
+                ChangeItemAmountUI(item, amount);
+            }
+            else
+            {
+                items.Add(item);
+                InventoryinventoryCleanup();
+                CallOnChangeCurentInventoryCapacity();
+            }
+        }
+        else
+        {
+            items.Add(item);
+            InventoryinventoryCleanup();
+            CallOnChangeCurentInventoryCapacity();
+        }
 
         
-    //    InventoryinventoryCleanup();
-    //}
+    }
 
     public void RemoveItem(Item item)
     {
@@ -136,6 +142,12 @@ public class InventoryManager : MonoBehaviour
     public void TestClick()
     {
         ChangeItemAmountUI(items[0], 1);
+
+    }
+
+    public void TestChlick2()
+    {
+        AddItem(items[7], 1);
     }
 
 

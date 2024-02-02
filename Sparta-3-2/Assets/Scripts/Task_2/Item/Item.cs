@@ -36,7 +36,9 @@ public class Item : ScriptableObject
     [Header("ETC")]
     public int health;
     public int price;
-    
+
+
+    public string itemInfo;
 
     public Item Copy()
     {
@@ -48,6 +50,7 @@ public class Item : ScriptableObject
         newItem.healAmount = healAmount;
         newItem.amount = amount;
         newItem.price = price;
+        newItem.itemInfo = itemInfo;
 
         return newItem;
 

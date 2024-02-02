@@ -2,27 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
     
-    public List<Item> items = new List<Item>(); //todo
-
+    public List<Item> items = new List<Item>(100); //todo
 
     public GameObject itemHolder;
     public Transform content;
 
 
+    public TMPro.TextMeshProUGUI currentIneventroyCapacityText;
+    public event Action OnChangeCurentInventoryCapacity;
+
     private void Awake()
     {
         Instance = this;
+        OnChangeCurentInventoryCapacity += ChangeCurrentInventoryCapacityText;
     }
 
     private void Start()
     {
         InventoryinventoryCleanup();
+        ChangeCurrentInventoryCapacityText();
+    }
+
+    public void CallOnChangeCurentInventoryCapacity()
+    {
+        OnChangeCurentInventoryCapacity?.Invoke();
     }
 
 
@@ -40,6 +49,11 @@ public class InventoryManager : MonoBehaviour
                 if(itemSO.itemType == ItemType.Consum)
                 {
                     GameObject item = Instantiate(itemHolder, content);
+                    //todo
+                    
+                        item.AddComponent<ItemController>();
+                        item.GetComponent<ItemController>().item = itemSO;
+                    //todo
                     var itemIcon = item.transform.Find("Icon").GetComponent<Image>();
                     itemIcon.sprite = itemSO.icon;
                     Debug.Log(itemSO.amount);
@@ -57,6 +71,8 @@ public class InventoryManager : MonoBehaviour
                 else
                 {
                     GameObject item = Instantiate(itemHolder, content);
+                    item.AddComponent<ItemController>();
+                    item.GetComponent<ItemController>().item = itemSO;
                     var itemIcon = item.transform.Find("Icon").GetComponent<Image>();
                     itemIcon.sprite = itemSO.icon;
                 }
@@ -66,6 +82,11 @@ public class InventoryManager : MonoBehaviour
         
     }
 
+    void ChangeCurrentInventoryCapacityText()
+    {
+        int curInventoryCapacity = content.childCount;
+        currentIneventroyCapacityText.text = curInventoryCapacity.ToString();
+    }
 
     //public void AddItem(Item item,int amount)
     //{
@@ -108,10 +129,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+
+
+
+
     public void TestClick()
     {
         ChangeItemAmountUI(items[0], 1);
     }
+
+
 
 
 }

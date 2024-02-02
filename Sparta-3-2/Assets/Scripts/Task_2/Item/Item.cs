@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//0 ~ 10 consum
+//100 ~ 199 shield
+//200 ~ 299 weapon
+
+
+
 public enum ItemType
 {
     Weapon,
@@ -45,7 +51,8 @@ public class Item : ScriptableObject
 
         return newItem;
 
-
     }
+
+
 
 }

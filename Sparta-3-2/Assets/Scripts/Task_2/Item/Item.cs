@@ -10,6 +10,7 @@ public enum ItemType
     Consum
 }
 [SerializeField]
+[System.Serializable]
 [CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
 public class Item : ScriptableObject
 {

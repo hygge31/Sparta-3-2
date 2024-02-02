@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
+    
     public List<Item> items = new List<Item>(); //todo
 
 
@@ -31,7 +32,7 @@ public class InventoryManager : MonoBehaviour
         {
             foreach(Transform item in content)
             {
-                Destroy(item);
+                Destroy(item.gameObject);
             }
 
             foreach (Item itemSO in items)
@@ -41,10 +42,16 @@ public class InventoryManager : MonoBehaviour
                     GameObject item = Instantiate(itemHolder, content);
                     var itemIcon = item.transform.Find("Icon").GetComponent<Image>();
                     itemIcon.sprite = itemSO.icon;
+                    Debug.Log(itemSO.amount);
                     if (itemSO.amount > 1)
                     {
-                        item.transform.Find("Amount").gameObject.SetActive(true);
-                        item.transform.Find("Amount").GetComponent<TMPro.TextMeshProUGUI>().text = itemSO.amount.ToString();
+                        Transform curItemTransform = item.transform.Find("Amount");
+                        curItemTransform.Find("AmountText").GetComponent<TMPro.TextMeshProUGUI>().text = itemSO.amount.ToString();
+
+                        if (!curItemTransform.gameObject.activeSelf)
+                        {
+                            curItemTransform.gameObject.SetActive(true);
+                        }
                     }
                 }
                 else
@@ -86,20 +93,18 @@ public class InventoryManager : MonoBehaviour
 
 
 
-    public void ChangeItemAmountUI(Item _item , int amount) //Item Type == Consum
+    public void ChangeItemAmountUI(Item _item , int amount) //Item Type == Consum, increase Amount.
     {
-        foreach(Transform itemTransform in content)
+        for (int i = 0; i < items.Count; i++)
         {
-            Debug.Log(itemTransform.gameObject.GetComponent<Item>().id);
-            //if(item.gameObject.GetComponent<Item>().id == _item.id)
-            //{
-            //    Debug.Log("Find");
-            //    //Item curItem = item.GetComponent<Item>().Copy();
-            //    //curItem.amount+=amount;
-            //    //item.transform.Find("Amount").GetComponent<TMPro.TextMeshProUGUI>().text = curItem.amount.ToString();
-            //    //_item = curItem;
-            //}
-
+            if (items[i].id == _item.id)
+            {
+                Item newItemOS = ScriptableObject.CreateInstance<Item>();
+                newItemOS = _item.Copy();
+                newItemOS.amount += amount;
+                items[i] = newItemOS;
+                InventoryinventoryCleanup();
+            }
         }
     }
 

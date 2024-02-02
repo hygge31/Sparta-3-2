@@ -8,8 +8,4 @@ public class ItemController : MonoBehaviour
     public GameObject eq;
 
 
-    public void AddStatus()
-    {
-
-    }
 }

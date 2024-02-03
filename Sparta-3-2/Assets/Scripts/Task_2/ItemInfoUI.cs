@@ -35,12 +35,20 @@ public class ItemInfoUI : MonoBehaviour
         itemNameText.text = item.itemName;
         itemInfoText.text = item.itemInfo;
         list = item.GetItemStatus();
-
+        CleanUp();
         ChangeRectSize();
         CreateItemStatusInfoBox();
 
     }
-    
+
+    void CleanUp()
+    {
+        foreach(Transform t in itemStatusInfoBoxContainer)
+        {
+            Destroy(t.gameObject);
+        }
+    }
+
 
     void ChangeRectSize()
     {

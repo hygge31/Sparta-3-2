@@ -94,3 +94,15 @@ public class Task_2_UIManager : Util
         playerExpBar.value = curExt;
     }
 }
+
+public struct ItemStatus
+{
+    public string statusName;
+    public int status;
+
+    public ItemStatus(string n,int s)
+    {
+        statusName = n;
+        status = s;
+    }
+}

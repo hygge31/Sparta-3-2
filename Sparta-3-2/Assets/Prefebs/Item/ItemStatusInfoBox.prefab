@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1141025086548557559}
   - component: {fileID: 1267619248939373082}
   - component: {fileID: 5118358245856144925}
+  - component: {fileID: 5661785516875058198}
   m_Layer: 5
   m_Name: ItemStatusInfoBox
   m_TagString: Untagged
@@ -214,6 +215,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5661785516875058198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248011401622351647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20c49a2b1832407698e445c6bbf3728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 4380950898609868220}
+  statusInfoText: {fileID: 4204064378694307172}
+  statusText: {fileID: 7669400078155955248}
 --- !u!1 &5991083656036044641
 GameObject:
   m_ObjectHideFlags: 0

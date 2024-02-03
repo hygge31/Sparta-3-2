@@ -17,6 +17,12 @@ public class InventoryManager : MonoBehaviour
     public TMPro.TextMeshProUGUI currentIneventroyCapacityText;
     public event Action OnChangeCurentInventoryCapacity;
 
+    [Header("Status Info")]
+    public ItemInfoUI statusInfoUI;
+
+
+
+
     private void Awake()
     {
         Instance = this;
@@ -136,7 +142,11 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-
+    public void OnItemInfoUI(Item item)
+    {
+        statusInfoUI.SetItemInfo(item);
+        statusInfoUI.gameObject.SetActive(true);
+    }
 
 
     public void TestClick()

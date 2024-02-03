@@ -18,8 +18,10 @@ public class ItemController : MonoBehaviour
     }
 
 
-    void OnClickEvent(Item item)
+    void OnClickEvent(Item item) // item status container 
     {
-        Debug.Log(item.itemName);
+
+        InventoryManager.Instance.OnItemInfoUI(item);
+        
     }
 }

@@ -40,6 +40,9 @@ public class Item : ScriptableObject
 
     public string itemInfo;
 
+    public Queue queue = new Queue();
+
+
     public Item Copy()
     {
         Item newItem = ScriptableObject.CreateInstance<Item>();
@@ -56,6 +59,22 @@ public class Item : ScriptableObject
 
     }
 
+    public List<ItemStatus> GetItemStatus()
+    {
+        List<ItemStatus> list = new List<ItemStatus>();
+        if(damage != 0) { list.Add(new ItemStatus("damage", damage)); }
+        if (critical != 0) { list.Add(new ItemStatus("critical", critical)); }
+        if (shield != 0) { list.Add(new ItemStatus("shield", shield)); }
+        if (healAmount != 0) { list.Add(new ItemStatus("healAmount", healAmount)); }
+        if (health != 0) { list.Add(new ItemStatus("health", health)); }
 
+        return list;
+
+    }
+
+    public int GetPrice()
+    {
+        return price;
+    }
 
 }

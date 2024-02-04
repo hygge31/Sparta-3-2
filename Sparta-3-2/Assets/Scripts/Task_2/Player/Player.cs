@@ -8,13 +8,13 @@ public class Player : MonoBehaviour
     public int playerLevel = 1;
 
     public int attackDamage = 40;
-    public int attackDamageIncrease;
+    public int attackDamageIncrease=0;
     public int shield = 25;
-    public int shieldIncrease;
+    public int shieldIncrease=0;
     public int health = 70;
-    public int healthIncrease;
+    public int healthIncrease=0;
     public int critcal = 25;
-    public int critcalIncrease;
+    public int critcalIncrease=0;
 
 
     public int curHp;
@@ -34,19 +34,27 @@ public class Player : MonoBehaviour
 
     }
 
+
+
+    public Item weaponEquip;
+    public Item shieldEquip;
+
+
+
+
     public List<ItemStatus> GetPlayerIncreaseStatus()
     {
         List<ItemStatus> list = new List<ItemStatus>();
-        if (attackDamageIncrease != 0) { list.Add(new ItemStatus("damage", attackDamageIncrease)); }
-        if (critcalIncrease != 0) { list.Add(new ItemStatus("critical", critcalIncrease)); }
-        if (shieldIncrease != 0) { list.Add(new ItemStatus("shield", shieldIncrease)); }
-        if (healthIncrease != 0) { list.Add(new ItemStatus("health", healthIncrease)); }
+        list.Add(new ItemStatus("damage", attackDamageIncrease));
+        list.Add(new ItemStatus("critical", critcalIncrease)); 
+        list.Add(new ItemStatus("shield", shieldIncrease)); 
+        list.Add(new ItemStatus("health", healthIncrease)); 
 
         return list;
 
     }
 
-    public void SetPlayerStatus(List<ItemStatus> list,bool trueAndFalse)
+    void SetPlayerStatus(List<ItemStatus> list,bool trueAndFalse)
     {
         if (trueAndFalse)
         {
@@ -93,14 +101,36 @@ public class Player : MonoBehaviour
             }
         }
 
-       
-
         Task_2_UIManager.Instance.CallOnStatusChange();
     }
 
 
     public void SetEquipItem(Item item)
     {
+        switch (item.itemType)
+        {
+            case ItemType.Weapon:
+                if(item == weaponEquip)
+                {
+                    SetPlayerStatus(item.GetItemStatus(), false);
+                    weaponEquip = null;
+                }
+                else if(weaponEquip == null)
+                {
+                    weaponEquip = item;
+                    SetPlayerStatus(item.GetItemStatus(), true);
+                }
+                else
+                {
+                    SetPlayerStatus(weaponEquip.GetItemStatus(), false);
+                    SetPlayerStatus(item.GetItemStatus(), true);
+                    weaponEquip = item;
+                }
+
+                break;
+            
+        }
+
         //웨폰의 경우
         //웨폰이 착용중이라면 현재 착용죽인 아이템을 벗고 -> - 스텟, 인벤토리매니저 아이템 장착 해제
         //새로운 아이템 장착. -> +스텟, 인벤토리 매니저 아이템 장,

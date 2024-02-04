@@ -81,8 +81,7 @@ public class Task_2_UIManager : Util
 
         foreach(ItemStatus status in playerIncreaseStautsList)
         {
-            if(status.status != 0)
-            {
+            
                 switch (status.statusName)
                 {
                     case "damage":
@@ -96,63 +95,62 @@ public class Task_2_UIManager : Util
                             attackIncreaseText.color = Color.blue;
                             attackIncreaseText.text = $"+ {status.status}";
                         }
-                        else 
+                        else
                         {
-                            attackIncreaseText.text = "";
+                            attackIncreaseText.text = " ";
                         }
                         break;
                     case "critical":
                         if (status.status < 0)
                         {
-                            attackIncreaseText.color = Color.red;
-                            attackIncreaseText.text = status.status.ToString();
+                            critcalIncreaseText.color = Color.red;
+                            critcalIncreaseText.text = status.status.ToString();
                         }
                         else if (status.status > 0)
                         {
-                            attackIncreaseText.color = Color.blue;
-                            attackIncreaseText.text = $"+ {status.status}";
+                            critcalIncreaseText.color = Color.blue;
+                            critcalIncreaseText.text = $"+ {status.status}";
                         }
                         else
                         {
-                            attackIncreaseText.text = "";
+                            critcalIncreaseText.text = " ";
                         }
                         break;
                     case "shield":
                         if (status.status < 0)
                         {
-                            attackIncreaseText.color = Color.red;
-                            attackIncreaseText.text = status.status.ToString();
+                            shieldIncreaseText.color = Color.red;
+                            shieldIncreaseText.text = status.status.ToString();
                         }
                         else if (status.status > 0)
                         {
-                            attackIncreaseText.color = Color.blue;
-                            attackIncreaseText.text = $"+ {status.status}";
+                            shieldIncreaseText.color = Color.blue;
+                            shieldIncreaseText.text = $"+ {status.status}";
                         }
                         else
                         {
-                            attackIncreaseText.text = "";
+                            shieldIncreaseText.text = " ";
                         }
                         break;
                     case "health":
                         if (status.status < 0)
                         {
-                            attackIncreaseText.color = Color.red;
-                            attackIncreaseText.text = status.status.ToString();
+                            healthIncreaseText.color = Color.red;
+                            healthIncreaseText.text = status.status.ToString();
                         }
                         else if (status.status > 0)
                         {
-                            attackIncreaseText.color = Color.blue;
-                            attackIncreaseText.text = $"+ {status.status}";
+                            healthIncreaseText.color = Color.blue;
+                            healthIncreaseText.text = $"+ {status.status}";
                         }
                         else
                         {
-                            attackIncreaseText.text = "";
+                            healthIncreaseText.text = " ";
                         }
                         break;
                 }
             }
-           
-        }
+        
     }
 
     void ChangeUIPlayerEXP()

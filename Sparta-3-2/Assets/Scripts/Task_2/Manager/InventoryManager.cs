@@ -181,6 +181,15 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    public void SetEquipItem(Item item)
+    {
+        //해당 아이탬의 컨트롤러에 접근
+        //해당 아이템의 게임오브젝트에 접근
+        //해당 아이템의 오브젝트의 EQ 가 켜져있는지 확인
+        //켜져있다면 
+    }
+
+
 
     
     public void TestBtn()

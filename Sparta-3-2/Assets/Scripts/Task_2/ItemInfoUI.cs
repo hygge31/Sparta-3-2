@@ -98,7 +98,16 @@ public class ItemInfoUI : MonoBehaviour
             }
             else
             {
-                message.text = "장비를 장착하시겠습니까?";
+                if (curItem != GameManager.Instance.player.weaponEquip && curItem != GameManager.Instance.player.shieldEquip)
+                {
+                    message.text = "장비를 장착하시겠습니까?";
+                }
+                else
+                {
+                    message.text = "장비를 해ㅎ하시겠습니까?";
+                }
+
+                
             }
         }
         else
@@ -171,6 +180,8 @@ public class ItemInfoUI : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.player.SetEquipItem(curItem);
+            gameObject.SetActive(false);
             //스위치 웨폰인지 아머인지.
             //플레이어의 장착했는지 안했는지 확인,
             //장착안했으면 바로 아이템 적용 ,인벤토리매니저의 장착 처리.

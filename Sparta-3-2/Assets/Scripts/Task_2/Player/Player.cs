@@ -71,4 +71,11 @@ public class Player : MonoBehaviour
         Task_2_UIManager.Instance.CallOnStatusChange();
     }
 
+
+    public void SetEquipItem(Item item)
+    {
+        //asd
+    }
+
+
 }

@@ -121,13 +121,22 @@ public class InventoryManager : MonoBehaviour
     public void RemoveItem(Item item)
     {
         items.Remove(item);
-        InventoryinventoryCleanup();
+
+        foreach(Transform tItem in content)
+        {
+            Item curItem = tItem.GetComponent<ItemController>().item;
+            if(curItem == item)
+            {
+                Destroy(tItem.gameObject);
+            }
+        }
     }
 
 
 
     public void ChangeItemAmountUI(Item _item , int amount) //Item Type == Consum, increase Amount. if consum item amount less 0, then Remove item.
     {
+
         for (int i = 0; i < items.Count; i++)
         {
             if (items[i].id == _item.id)
@@ -139,12 +148,10 @@ public class InventoryManager : MonoBehaviour
                 if(newItemOS.amount <= 0)
                 {
                     items.RemoveAt(i);
+                    RemoveItem(_item);
                 }
                 else { items[i] = newItemOS; }
 
-
-                
-                InventoryinventoryCleanup();
             }
         }
     }

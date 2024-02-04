@@ -46,27 +46,54 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetPlayerStatus(List<ItemStatus> list)
+    public void SetPlayerStatus(List<ItemStatus> list,bool trueAndFalse)
     {
-        foreach(ItemStatus status in list)
+        if (trueAndFalse)
         {
-            switch (status.statusName)
+            foreach (ItemStatus status in list)
             {
-                case "damage":
-                    attackDamageIncrease += status.status;
-                    break;
-                case "critical":
-                    critcalIncrease += status.status;
-                    break;
-                case "shield":
-                    shieldIncrease += status.status;
-                    break;
-                case "health":
-                    healthIncrease += status.status;
-                    break;
-            }
+                switch (status.statusName)
+                {
+                    case "damage":
+                        attackDamageIncrease += status.status;
+                        break;
+                    case "critical":
+                        critcalIncrease += status.status;
+                        break;
+                    case "shield":
+                        shieldIncrease += status.status;
+                        break;
+                    case "health":
+                        healthIncrease += status.status;
+                        break;
+                }
 
+            }
         }
+        else
+        {
+            foreach (ItemStatus status in list)
+            {
+                switch (status.statusName)
+                {
+                    case "damage":
+                        attackDamageIncrease += status.status *(-1);
+                        break;
+                    case "critical":
+                        critcalIncrease += status.status * (-1);
+                        break;
+                    case "shield":
+                        shieldIncrease += status.status * (-1);
+                        break;
+                    case "health":
+                        healthIncrease += status.status * (-1);
+                        break;
+                }
+
+            }
+        }
+
+       
 
         Task_2_UIManager.Instance.CallOnStatusChange();
     }
@@ -74,7 +101,10 @@ public class Player : MonoBehaviour
 
     public void SetEquipItem(Item item)
     {
-        //
+        //웨폰의 경우
+        //웨폰이 착용중이라면 현재 착용죽인 아이템을 벗고 -> - 스텟, 인벤토리매니저 아이템 장착 해제
+        //새로운 아이템 장착. -> +스텟, 인벤토리 매니저 아이템 장,
+        //아머의 경우
 
     }
 

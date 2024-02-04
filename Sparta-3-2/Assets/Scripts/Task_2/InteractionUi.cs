@@ -6,8 +6,9 @@ public class InteractionUi : MonoBehaviour
 {
     public GameObject btnContainer;
     public GameObject statusContainer;
-    public GameObject inventoryContainer;
 
+    public GameObject inventoryContainer;
+    public GameObject itemInfoUI;
 
 
     public void ToggleStatusContainer()
@@ -26,8 +27,9 @@ public class InteractionUi : MonoBehaviour
 
     public void ToggleInventoryContainer()
     {
-        if (statusContainer.activeSelf)
+        if (inventoryContainer.activeSelf)
         {
+            itemInfoUI.SetActive(false);
             inventoryContainer.SetActive(false);
             btnContainer.SetActive(true);
         }
@@ -37,5 +39,8 @@ public class InteractionUi : MonoBehaviour
             btnContainer.SetActive(false);
         }
     }
+
+
+
 
 }

@@ -95,6 +95,7 @@ public class Task_2_UIManager : Util
     }
 }
 
+
 public struct ItemStatus
 {
     public string statusName;

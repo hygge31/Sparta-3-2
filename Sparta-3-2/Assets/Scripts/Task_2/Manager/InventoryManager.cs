@@ -142,23 +142,13 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void OnItemInfoUI(Item item)
+    public void OnItemInfoUI(Item item) // Open Iteminfo Ui and Set item info.
     {
         statusInfoUI.SetItemInfo(item);
         statusInfoUI.gameObject.SetActive(true);
     }
 
 
-    public void TestClick()
-    {
-        ChangeItemAmountUI(items[0], 1);
-
-    }
-
-    public void TestChlick2()
-    {
-        AddItem(items[7], 1);
-    }
 
 
 

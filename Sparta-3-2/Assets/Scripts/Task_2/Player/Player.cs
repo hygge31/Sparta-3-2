@@ -74,7 +74,8 @@ public class Player : MonoBehaviour
 
     public void SetEquipItem(Item item)
     {
-        //asd
+        //
+
     }
 
 

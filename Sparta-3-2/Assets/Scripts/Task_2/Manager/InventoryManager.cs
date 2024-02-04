@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using static UnityEditor.Progress;
+
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
@@ -41,7 +43,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void InventoryinventoryCleanup()
+    public void InventoryinventoryCleanup() //text cod, marchent Logic
     {
         if(items.Count != 0)
         {
@@ -55,11 +57,10 @@ public class InventoryManager : MonoBehaviour
                 if(itemSO.itemType == ItemType.Consum)
                 {
                     GameObject item = Instantiate(itemHolder, content);
-                    //todo
+
+                    item.AddComponent<ItemController>();
+                    item.GetComponent<ItemController>().item = itemSO;
                     
-                        item.AddComponent<ItemController>();
-                        item.GetComponent<ItemController>().item = itemSO;
-                    //todo
                     var itemIcon = item.transform.Find("Icon").GetComponent<Image>();
                     itemIcon.sprite = itemSO.icon;
                     if (itemSO.amount > 1)
@@ -75,17 +76,25 @@ public class InventoryManager : MonoBehaviour
                 }
                 else
                 {
-                    GameObject item = Instantiate(itemHolder, content);
-                    item.AddComponent<ItemController>();
-                    item.GetComponent<ItemController>().item = itemSO;
-                    var itemIcon = item.transform.Find("Icon").GetComponent<Image>();
-                    itemIcon.sprite = itemSO.icon;
+                    CreateItem(itemSO);
                 }
                
             }
+
+            //marchent item info, -> Ex)  itemController OnClickEenet
         }
         
     }
+
+    void CreateItem(Item itemSO)
+    {
+        GameObject item = Instantiate(itemHolder, content);
+        item.AddComponent<ItemController>();
+        item.GetComponent<ItemController>().item = itemSO;
+        var itemIcon = item.transform.Find("Icon").GetComponent<Image>();
+        itemIcon.sprite = itemSO.icon;
+    }
+
 
     void ChangeCurrentInventoryCapacityText()
     {
@@ -104,15 +113,15 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 items.Add(item);
-                InventoryinventoryCleanup();
+                CreateItem(item);
                 CallOnChangeCurentInventoryCapacity();
             }
         }
         else
         {
-            items.Add(item);
-            InventoryinventoryCleanup();
-            CallOnChangeCurentInventoryCapacity();
+            Item newItem = item.Copy();
+            items.Add(newItem);
+            CreateItem(newItem);
         }
 
         
@@ -130,6 +139,7 @@ public class InventoryManager : MonoBehaviour
                 Destroy(tItem.gameObject);
             }
         }
+        CallOnChangeCurentInventoryCapacity();
     }
 
 
@@ -137,29 +147,56 @@ public class InventoryManager : MonoBehaviour
     public void ChangeItemAmountUI(Item _item , int amount) //Item Type == Consum, increase Amount. if consum item amount less 0, then Remove item.
     {
 
-        for (int i = 0; i < items.Count; i++)
+        foreach(Transform curTransformItem in content)
         {
-            if (items[i].id == _item.id)
+            if (curTransformItem.GetComponent<ItemController>())
             {
-                Item newItemOS = ScriptableObject.CreateInstance<Item>();
-                newItemOS = _item.Copy();
-                newItemOS.amount += amount;
-
-                if(newItemOS.amount <= 0)
+                Item curItem = curTransformItem.GetComponent<ItemController>().item;
+                if (curItem == _item)
                 {
-                    items.RemoveAt(i);
-                    RemoveItem(_item);
-                }
-                else { items[i] = newItemOS; }
+                    Transform curItemTransform = curTransformItem.Find("Amount");
+                    TMPro.TextMeshProUGUI amountText = curItemTransform.Find("AmountText").GetComponent<TMPro.TextMeshProUGUI>();
 
+                    int curAmount = int.Parse(amountText.text);
+                    curAmount += amount;
+                    if(curAmount <= 0)
+                    {
+                        items.Remove(curItem);
+                        Destroy(curTransformItem.gameObject);
+                    }
+                    else if(curAmount >1)
+                    {
+                        amountText.text = curAmount.ToString();
+                        curItemTransform.gameObject.SetActive(true);
+                    }else if(curAmount == 1)
+                    {
+                        amountText.text = curAmount.ToString();
+                        curItemTransform.gameObject.SetActive(false);
+                    }
+                    
+                }
             }
+           
         }
+
     }
 
 
     
+    public void TestBtn()
+    {
+        AddItem(items[7], 1);
+    }
 
+    public void TestBtn2()
+    {
+        if (items[7] == items[items.Count - 1])
+        {
+            Debug.Log("true");
+        }
+        else { Debug.Log("fasle"); }
 
+    }
 
 
 

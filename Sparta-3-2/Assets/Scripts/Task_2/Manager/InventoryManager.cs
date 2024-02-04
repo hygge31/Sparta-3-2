@@ -181,12 +181,12 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-    public void SetEquipItem(Item item)
+    public void SetEquipItem(Item item,bool trueAndFalse)
     {
-        //해당 아이탬의 컨트롤러에 접근
-        //해당 아이템의 게임오브젝트에 접근
-        //해당 아이템의 오브젝트의 EQ 가 켜져있는지 확인
-        //켜져있다면 
+        //장착 또는 해제 처리.
+
+        //먼저 해당 아이템 트렌스폼으로 찾기.
+        // 장창 해제인지 장착인지 확인후 처리.
     }
 
 

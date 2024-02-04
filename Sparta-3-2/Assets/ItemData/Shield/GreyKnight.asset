@@ -21,6 +21,6 @@ MonoBehaviour:
   shield: 30
   healAmount: 0
   amount: 1
-  health: 10
+  health: 30
   price: 1500
   itemInfo: 

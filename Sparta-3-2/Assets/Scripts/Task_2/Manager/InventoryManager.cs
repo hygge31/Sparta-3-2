@@ -126,7 +126,7 @@ public class InventoryManager : MonoBehaviour
 
 
 
-    public void ChangeItemAmountUI(Item _item , int amount) //Item Type == Consum, increase Amount.
+    public void ChangeItemAmountUI(Item _item , int amount) //Item Type == Consum, increase Amount. if consum item amount less 0, then Remove item.
     {
         for (int i = 0; i < items.Count; i++)
         {
@@ -135,18 +135,22 @@ public class InventoryManager : MonoBehaviour
                 Item newItemOS = ScriptableObject.CreateInstance<Item>();
                 newItemOS = _item.Copy();
                 newItemOS.amount += amount;
-                items[i] = newItemOS;
+
+                if(newItemOS.amount <= 0)
+                {
+                    items.RemoveAt(i);
+                }
+                else { items[i] = newItemOS; }
+
+
+                
                 InventoryinventoryCleanup();
             }
         }
     }
 
 
-    public void OnItemInfoUI(Item item) // Open Iteminfo Ui and Set item info.
-    {
-        statusInfoUI.SetItemInfo(item);
-        statusInfoUI.gameObject.SetActive(true);
-    }
+    
 
 
 

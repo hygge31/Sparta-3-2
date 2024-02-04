@@ -18,10 +18,9 @@ public class ItemController : MonoBehaviour
     }
 
 
-    void OnClickEvent(Item item) // item status container 
+    void OnClickEvent(Item item) 
     {
+        Task_2_UIManager.Instance.OnItemInfoUI(item);
 
-        InventoryManager.Instance.OnItemInfoUI(item);
-        
     }
 }

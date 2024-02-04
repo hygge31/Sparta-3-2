@@ -14,15 +14,29 @@ public class Task_2_UIManager : Util
     public TMPro.TextMeshProUGUI playerLevelText;
     public TMPro.TextMeshProUGUI playerNameText;
     public Slider playerExpBar;
+    [Space(10)]
     public TMPro.TextMeshProUGUI attackText;
+    public TMPro.TextMeshProUGUI attackIncreaseText;
+    [Space(10)]
     public TMPro.TextMeshProUGUI shieldText;
+    public TMPro.TextMeshProUGUI shieldIncreaseText;
+    [Space(10)]
     public TMPro.TextMeshProUGUI healthText;
+    public TMPro.TextMeshProUGUI healthIncreaseText;
+    [Space(10)]
     public TMPro.TextMeshProUGUI critcalText;
+    public TMPro.TextMeshProUGUI critcalIncreaseText;
+
+    [Space(10)]
     public TMPro.TextMeshProUGUI moneyText;
     public TMPro.TextMeshProUGUI expText;
 
     public event Action OnStatusChange;
     public event Action OnStatusChangeEXP;
+
+    [Header("UI")]
+    public ItemInfoUI itemInfoUi;
+
 
     private void Awake()
     {
@@ -62,7 +76,85 @@ public class Task_2_UIManager : Util
         healthText.text = player.health.ToString();
         critcalText.text = player.critcal.ToString();
         moneyText.text = GetThousandCommaText(player.money);
+
+        List<ItemStatus> playerIncreaseStautsList = player.GetPlayerIncreaseStatus();
+
+        foreach(ItemStatus status in playerIncreaseStautsList)
+        {
+            if(status.status != 0)
+            {
+                switch (status.statusName)
+                {
+                    case "damage":
+                        if(status.status < 0)
+                        {
+                            attackIncreaseText.color = Color.red;
+                            attackIncreaseText.text = status.status.ToString();
+                        }
+                        else if(status.status > 0)
+                        {
+                            attackIncreaseText.color = Color.blue;
+                            attackIncreaseText.text = $"+ {status.status}";
+                        }
+                        else 
+                        {
+                            attackIncreaseText.text = "";
+                        }
+                        break;
+                    case "critical":
+                        if (status.status < 0)
+                        {
+                            attackIncreaseText.color = Color.red;
+                            attackIncreaseText.text = status.status.ToString();
+                        }
+                        else if (status.status > 0)
+                        {
+                            attackIncreaseText.color = Color.blue;
+                            attackIncreaseText.text = $"+ {status.status}";
+                        }
+                        else
+                        {
+                            attackIncreaseText.text = "";
+                        }
+                        break;
+                    case "shield":
+                        if (status.status < 0)
+                        {
+                            attackIncreaseText.color = Color.red;
+                            attackIncreaseText.text = status.status.ToString();
+                        }
+                        else if (status.status > 0)
+                        {
+                            attackIncreaseText.color = Color.blue;
+                            attackIncreaseText.text = $"+ {status.status}";
+                        }
+                        else
+                        {
+                            attackIncreaseText.text = "";
+                        }
+                        break;
+                    case "health":
+                        if (status.status < 0)
+                        {
+                            attackIncreaseText.color = Color.red;
+                            attackIncreaseText.text = status.status.ToString();
+                        }
+                        else if (status.status > 0)
+                        {
+                            attackIncreaseText.color = Color.blue;
+                            attackIncreaseText.text = $"+ {status.status}";
+                        }
+                        else
+                        {
+                            attackIncreaseText.text = "";
+                        }
+                        break;
+                }
+            }
+           
+        }
     }
+
     void ChangeUIPlayerEXP()
     {
         expText.text = $"{player.currentEXP} / {player.maxEXP}";
@@ -93,6 +185,23 @@ public class Task_2_UIManager : Util
         playerExpBar.maxValue = maxExp;
         playerExpBar.value = curExt;
     }
+
+
+
+
+    public void OnItemInfoUI(Item item) // Open Iteminfo Ui and Set item info.
+    {
+        itemInfoUi.SetItemInfo(item);
+        itemInfoUi.gameObject.SetActive(true);
+    }
+
+
+
+
+
+
+
+
 }
 
 

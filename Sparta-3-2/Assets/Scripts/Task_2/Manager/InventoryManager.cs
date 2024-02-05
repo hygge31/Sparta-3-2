@@ -124,6 +124,7 @@ public class InventoryManager : MonoBehaviour
             CreateItem(newItem);
         }
 
+        CallOnChangeCurentInventoryCapacity();
         
     }
 
@@ -163,6 +164,7 @@ public class InventoryManager : MonoBehaviour
                     {
                         items.Remove(curItem);
                         Destroy(curTransformItem.gameObject);
+                        CallOnChangeCurentInventoryCapacity();
                     }
                     else if(curAmount >1)
                     {
@@ -181,8 +183,27 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-    public void SetEquipItem(Item item,bool trueAndFalse)
+    public void SetEquipItem(Item item)
     {
+            foreach(Transform tItem in content)
+            {
+                if(tItem.GetComponent<ItemController>())
+                {
+                    Item curItem = tItem.GetComponent<ItemController>().item;
+                    if(curItem == item)
+                    {
+                        GameObject eq = tItem.Find("Eq").gameObject;
+                        if (eq.activeSelf)
+                        {
+                            eq.SetActive(false);
+                        }
+                        else
+                        {
+                            eq.SetActive(true);
+                        }
+                    }
+                }
+        }
         //장착 또는 해제 처리.
 
         //먼저 해당 아이템 트렌스폼으로 찾기.

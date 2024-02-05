@@ -113,27 +113,47 @@ public class Player : MonoBehaviour
                 if(item == weaponEquip)
                 {
                     SetPlayerStatus(item.GetItemStatus(), false);
+                    InventoryManager.Instance.SetEquipItem(item);
                     weaponEquip = null;
                 }
                 else if(weaponEquip == null)
                 {
                     weaponEquip = item;
                     SetPlayerStatus(item.GetItemStatus(), true);
+                    InventoryManager.Instance.SetEquipItem(item);
                 }
                 else
                 {
                     SetPlayerStatus(weaponEquip.GetItemStatus(), false);
+                    InventoryManager.Instance.SetEquipItem(weaponEquip);
                     SetPlayerStatus(item.GetItemStatus(), true);
+                    InventoryManager.Instance.SetEquipItem(item);
                     weaponEquip = item;
                 }
-
                 break;
-            
+            case ItemType.Shield:
+                if (item == shieldEquip)
+                {
+                    SetPlayerStatus(item.GetItemStatus(), false);
+                    InventoryManager.Instance.SetEquipItem(item);
+                    shieldEquip = null;
+                }
+                else if (shieldEquip == null)
+                {
+                    shieldEquip = item;
+                    SetPlayerStatus(item.GetItemStatus(), true);
+                    InventoryManager.Instance.SetEquipItem(item);
+                }
+                else
+                {
+                    SetPlayerStatus(shieldEquip.GetItemStatus(), false);
+                    InventoryManager.Instance.SetEquipItem(shieldEquip);
+                    SetPlayerStatus(item.GetItemStatus(), true);
+                    InventoryManager.Instance.SetEquipItem(item);
+                    shieldEquip = item;
+                }
+                break;
         }
-
-        //웨폰의 경우
-            //아이템 장착 중인지 아닌지 인벤토리 매니저에 로직 짜기
-        //아머의 경우
 
     }
 

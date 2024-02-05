@@ -40,8 +40,8 @@ public class ItemInfoUI : MonoBehaviour
     public Button cencelBtn;
     public Button confirmBtn;
 
-    public GameObject inventoryContainerUI;
-    bool inInventoryUI;
+    public GameObject merchantContainerUI;
+    bool inMerchantContainerUI;
 
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class ItemInfoUI : MonoBehaviour
     public void SetItemInfo(Item item)
     {
 
-        Check_InInventoryUi();
+        Check_MerchantUi();
 
         curItem = item;
         icon.sprite = item.icon;
@@ -66,17 +66,17 @@ public class ItemInfoUI : MonoBehaviour
 
     }
 
-    void Check_InInventoryUi()
+    void Check_MerchantUi()
     {
-        if (inventoryContainerUI.activeSelf)
+        if (!merchantContainerUI.activeSelf)
         {
             confirmBtn.gameObject.SetActive(true);
-            inInventoryUI = true;
+            inMerchantContainerUI = false;
         }
         else
         {
             confirmBtn.gameObject.SetActive(false);
-            inInventoryUI = false;
+            inMerchantContainerUI = true;
         }
     }
 
@@ -90,7 +90,7 @@ public class ItemInfoUI : MonoBehaviour
 
     void ShowMessage()
     {
-        if(inInventoryUI)
+        if(!inMerchantContainerUI)
         {
             if (curItem.itemType == ItemType.Consum)
             {
@@ -104,7 +104,7 @@ public class ItemInfoUI : MonoBehaviour
                 }
                 else
                 {
-                    message.text = "장비를 해ㅎ하시겠습니까?";
+                    message.text = "장비를 해제하시겠습니까?";
                 }
 
                 
@@ -112,7 +112,7 @@ public class ItemInfoUI : MonoBehaviour
         }
         else
         {
-            message.text = "";
+            message.text = "아이템을 파시겠습니까";
         }
         
     }
@@ -163,6 +163,11 @@ public class ItemInfoUI : MonoBehaviour
         }
     }
 
+    public void UnActiveConfirmBtn()
+    {
+        confirmBtn.gameObject.SetActive(false);
+        message.text = "";
+    }
 
     void Cencel()
     {
@@ -171,26 +176,36 @@ public class ItemInfoUI : MonoBehaviour
 
     void Confirm()
     {
-        if(curItem.itemType == ItemType.Consum)
+        if (inMerchantContainerUI)
+        {
+            //판매
+            if(curItem.itemType != ItemType.Consum)
+            {
+                if(GameManager.Instance.player.weaponEquip != curItem && GameManager.Instance.player.shieldEquip != curItem)
+                {
+                    GameManager.Instance.player.money += (int)(curItem.price * 0.7f);
+                    InventoryManager.Instance.RemoveItem(curItem);
+                }
+                else
+                {
+                    GameManager.Instance.player.SetEquipItem(curItem);
+                    GameManager.Instance.player.money += (int)(curItem.price * 0.7f);
+                    InventoryManager.Instance.RemoveItem(curItem);
+                }
+            }
+        }
+        else if(curItem.itemType == ItemType.Consum)
         {
             //heal player HP, and Check excced player maxhp
             InventoryManager.Instance.ChangeItemAmountUI(curItem, -1);
             gameObject.SetActive(false);
 
-        }
+        }   
         else
         {
             GameManager.Instance.player.SetEquipItem(curItem);
             gameObject.SetActive(false);
-            //스위치 웨폰인지 아머인지.
-            //플레이어의 장착했는지 안했는지 확인,
-            //장착안했으면 바로 아이템 적용 ,인벤토리매니저의 장착 처리.
-
-            //플레이어가 이미 장착하고 있는경우에만 플레이어에게 파라미터 전달.
-
-
-            //현재 커런트아이템과 플레이어의 장착 아이템이 같으면 플레이어 스텟마이너스
-            //바로 인벤토리매니저의 장착 해제 로직으로.
+       
         }
     }
 

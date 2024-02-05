@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,6 +39,12 @@ public class Task_2_UIManager : Util
     public ItemInfoUI itemInfoUi;
 
 
+
+    [Header("Merchant")]
+    float resetTime = 300;
+    public float curTime;
+    public bool changeMerchantItem;
+
     private void Awake()
     {
         Instance = this;
@@ -56,6 +63,8 @@ public class Task_2_UIManager : Util
         playerExpBar.value = 0;
         ChangeUIPlayerStatus();
         ChangeUIPlayerEXP();
+
+        StartCoroutine(ItemResetTimer());
     }
     public void CallOnStatusChange()
     {
@@ -192,13 +201,32 @@ public class Task_2_UIManager : Util
         itemInfoUi.SetItemInfo(item);
         itemInfoUi.gameObject.SetActive(true);
     }
+    public void OnItemInfoUiNoConfirmBtn(Item item)
+    {
+        itemInfoUi.SetItemInfo(item);
+        itemInfoUi.UnActiveConfirmBtn();
+        itemInfoUi.gameObject.SetActive(true);
+    }
 
 
 
 
 
-
-
+    IEnumerator ItemResetTimer()
+    {
+        curTime = resetTime;
+        while (true)
+        {
+            if (curTime <= 0)
+            {
+                curTime = resetTime;
+                changeMerchantItem = true;
+            }
+           
+            curTime--;
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
 }
 

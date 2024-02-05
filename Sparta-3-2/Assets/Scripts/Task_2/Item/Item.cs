@@ -49,6 +49,10 @@ public class Item : ScriptableObject
         newItem.itemName = itemName;
         newItem.itemType = itemType;
         newItem.icon = icon;
+        newItem.damage = damage;
+        newItem.critical = critical;
+        newItem.shield = shield;
+        newItem.health = health;
         newItem.healAmount = healAmount;
         newItem.amount = amount;
         newItem.price = price;

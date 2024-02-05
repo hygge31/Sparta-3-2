@@ -6,6 +6,8 @@ public class InteractionUi : MonoBehaviour
 {
     public GameObject btnContainer;
     public GameObject statusContainer;
+    public GameObject merchantContainer;
+
 
     public GameObject inventoryContainer;
     public GameObject itemInfoUI;
@@ -40,6 +42,22 @@ public class InteractionUi : MonoBehaviour
         }
     }
 
+
+    public void ToggleMerchantContainer()
+    {
+        if (merchantContainer.activeSelf)
+        {
+            merchantContainer.SetActive(false);
+            inventoryContainer.SetActive(false);
+            btnContainer.SetActive(true);
+        }
+        else
+        {
+            merchantContainer.SetActive(true);
+            inventoryContainer.SetActive(true);
+            btnContainer.SetActive(false);
+        }
+    }
 
 
 

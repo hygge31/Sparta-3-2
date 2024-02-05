@@ -27,6 +27,21 @@ public class Player : MonoBehaviour
     public int maxEXP;
 
 
+    Animator animator;
+    public ParticleSystem effect1;
+    public ParticleSystem effect2;
+    float breathTime = 20;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();   
+    }
+
+    private void Start()
+    {
+        StartCoroutine(BreathCo());
+    }
+
     public void SetPlayerStatus(Item item)
     {
         List<ItemStatus> itemStatusList = new List<ItemStatus>();
@@ -157,5 +172,24 @@ public class Player : MonoBehaviour
 
     }
 
+    IEnumerator BreathCo()
+    {
+        float curTime = 5;
+        while (true)
+        {
+            if(curTime <= 0)
+            {
+                curTime = breathTime;
+                animator.SetTrigger("breath");
+                yield return new WaitForSeconds(2f);
+                effect1.Play();
+                effect2.Play();
+            }
+            curTime--;
+            yield return new WaitForSeconds(1f);
+        }
 
+
+       
+    }
 }

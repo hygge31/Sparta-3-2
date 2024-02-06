@@ -20,7 +20,7 @@ MonoBehaviour:
   critical: 0
   shield: 0
   healAmount: 7
-  amount: 1
+  amount: 0
   health: 0
   price: 400
   itemInfo: 

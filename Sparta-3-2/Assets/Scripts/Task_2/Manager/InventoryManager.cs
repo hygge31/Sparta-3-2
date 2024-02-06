@@ -114,6 +114,7 @@ public class InventoryManager : MonoBehaviour
             {
                 items.Add(item);
                 CreateItem(item);
+                ChangeItemAmountUI(item, amount);
                 CallOnChangeCurentInventoryCapacity();
             }
         }

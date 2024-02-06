@@ -24858,17 +24858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a8bbfa315964275a0329ab2fb7a1ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: 4aabc34f5e9f21844905d3d887bf6352, type: 2}
-  - {fileID: 11400000, guid: f45f6ee133c704446bf4c17285296229, type: 2}
-  - {fileID: 11400000, guid: 2fef87360cf7ec443b42bcad708f7c63, type: 2}
-  - {fileID: 11400000, guid: 9a9001ae85c1b4210a0c51a931bd3e87, type: 2}
-  - {fileID: 11400000, guid: d281c078e8c2845c0bc2b131f6aa9550, type: 2}
-  - {fileID: 11400000, guid: 5a697d196585c4068ba9239b93410d87, type: 2}
-  - {fileID: 11400000, guid: 08306d6a53f1447b4b43fdd4649b4ac0, type: 2}
-  - {fileID: 11400000, guid: cf5d34037b78742cca095a01fb306937, type: 2}
-  - {fileID: 11400000, guid: 309d9c738df60429ab4e70ea7653a32e, type: 2}
-  - {fileID: 11400000, guid: 586b930b70a634af683c22b630d2dbff, type: 2}
+  items: []
   itemHolder: {fileID: 1676712108037383719, guid: 0c9cc1b4cf2cc474b9769a0ae623369e, type: 3}
   content: {fileID: 2101791546}
   currentIneventroyCapacityText: {fileID: 1017879777}

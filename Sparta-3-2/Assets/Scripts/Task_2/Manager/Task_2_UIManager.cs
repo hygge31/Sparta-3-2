@@ -37,7 +37,7 @@ public class Task_2_UIManager : Util
 
     [Header("UI")]
     public ItemInfoUI itemInfoUi;
-
+    public ItemConsumInfoUI itemConsumInfoUI;
 
 
     [Header("Merchant")]
@@ -208,7 +208,11 @@ public class Task_2_UIManager : Util
         itemInfoUi.gameObject.SetActive(true);
     }
 
-
+    public void OnItemConsumInfoUI(Item item)
+    {
+        itemConsumInfoUI.SetItemInfo(item);
+        itemConsumInfoUI.gameObject.SetActive(true);
+    }
 
 
 

@@ -21,8 +21,12 @@ public class MerchantContainer : MonoBehaviour
     public List<Item> merchantConsumItemList = new List<Item>();
     public GameObject merchantItemBox;
     public Transform content;
+    public GameObject merchantConsumItemBox;
+    public Transform consumContent;
 
-
+    [Header("Merchant UI")]
+    public GameObject merchantItemContainer;
+    public GameObject merchantConsumItemContainer;
 
     [Header("Timer")]
     public TMPro.TextMeshProUGUI timeText;
@@ -33,6 +37,7 @@ public class MerchantContainer : MonoBehaviour
     private void Start()
     {
         MerchantItemCleanup();
+        CreateMerchantConsumItemList();
     }
 
 
@@ -91,6 +96,19 @@ public class MerchantContainer : MonoBehaviour
 
     }
 
+    public void CreateMerchantConsumItemList()
+    {
+        foreach(Item curitem in merchantConsumItemList)
+        {
+            MerchantConsumItemBox newBox = Instantiate(merchantConsumItemBox, consumContent).GetComponent<MerchantConsumItemBox>();
+            newBox.SetMerchantItemBox(curitem);
+        }
+
+
+       
+    }
+
+
 
 
     void MixUpList()
@@ -118,6 +136,22 @@ public class MerchantContainer : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         message.text = "";
+    }
+
+
+
+    public void ToggleMerchantContainer()
+    {
+        if (merchantItemContainer.activeSelf)
+        {
+            merchantItemContainer.SetActive(false);
+            merchantConsumItemContainer.SetActive(true);
+        }
+        else
+        {
+            merchantItemContainer.SetActive(true);
+            merchantConsumItemContainer.SetActive(false);
+        }
     }
 
 

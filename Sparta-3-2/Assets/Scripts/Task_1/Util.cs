@@ -6,6 +6,8 @@ public class Util : MonoBehaviour
 {
     public string GetThousandCommaText(int num)
     {
+        if(num <=0) return "0";
+
         return string.Format("{0:#,###}", num);
     }
 

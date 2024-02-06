@@ -22,5 +22,5 @@ MonoBehaviour:
   healAmount: 7
   amount: 1
   health: 0
-  price: 0
+  price: 400
   itemInfo: 
